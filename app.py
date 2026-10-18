@@ -21,19 +21,7 @@ st.caption(
 # 1. CLOUD DATABASE CONNECTION
 # ============================================================
 
-def get_connection():
-    """
-    Connect to your cloud MySQL-compatible database.
-
-    IMPORTANT:
-    Enter the host, username and password in Streamlit Cloud
-    -> App Settings -> Secrets. Do not hardcode credentials here.
-    """
-    cfg = st.secrets["mysql"]
-
-    return mysql.connector.connect(
-        # CLOUD HOST: configured in Streamlit Secrets
-        
+       
 def get_connection():
     cfg = st.secrets["mysql"]
 
