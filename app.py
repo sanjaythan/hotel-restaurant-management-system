@@ -33,24 +33,19 @@ def get_connection():
 
     return mysql.connector.connect(
         # CLOUD HOST: configured in Streamlit Secrets
-        host=cfg["gateway01.ap-northeast-1.prod.aws.tidbcloud.com"],
+        
+def get_connection():
+    cfg = st.secrets["mysql"]
 
-        # CLOUD PORT: configured in Streamlit Secrets
+    return mysql.connector.connect(
+        host=cfg["host"],
         port=int(cfg.get("port", 4000)),
-
-        # DATABASE NAME: e.g. "test" from your screenshot
-        database=cfg["test"],
-
-        # CLOUD USERNAME: configured in Streamlit Secrets
-        user=cfg["JnPFvQX5aXG9eK8.root"],
-
-        # CLOUD PASSWORD: configured in Streamlit Secrets
-        password=cfg["wgOMqav1ZAdVyyzV"],
-
+        database=cfg["database"],
+        user=cfg["user"],
+        password=cfg["password"],
         connection_timeout=15,
         ssl_disabled=False
     )
-
 
 def fetch_all(sql, params=()):
     conn = get_connection()
