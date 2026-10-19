@@ -420,8 +420,8 @@ with st.sidebar:
     )
     st.divider()
     st.markdown('<div class="side-label">PROJECT TEAM</div>', unsafe_allow_html=True)
-    st.caption("Sanjay Thandeeswaran · 25BCE2759")
-    st.caption("Monish Kumar T O · 25BCE2819")
+    st.markdown("Sanjay Thandeeswaran · 25BCE2759")
+    st.markdown("Monish Kumar T O · 25BCE2819")
 
 try:
     initialize_database()
