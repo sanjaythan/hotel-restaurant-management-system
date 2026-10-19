@@ -6,7 +6,7 @@ from datetime import date, timedelta
 from decimal import Decimal
 
 st.set_page_config(
-    page_title="Haven | Hotel & Restaurant Management",
+    page_title="Hotel & Restaurant Management",
     page_icon="🏨",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -17,52 +17,73 @@ st.set_page_config(
 # ============================================================
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
-:root { --ink:#172b3a; --muted:#657786; --teal:#0f766e; --teal2:#14b8a6; --sand:#f5f2eb; }
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root { --ink:#17211f; --muted:#77827e; --line:#e7eae5; --paper:#fbfbf8; --forest:#183d35; --mint:#d9eee5; --accent:#b4d9c9; }
 html, body, [class*="css"] { font-family:'DM Sans',sans-serif; }
-.stApp { background:linear-gradient(135deg,#f7f8fa 0%,#f4f7f6 100%); color:var(--ink); }
-[data-testid="stHeader"] { background:rgba(247,248,250,.85); }
-.block-container { padding-top:1.6rem; padding-bottom:2.5rem; max-width:1450px; }
-[data-testid="stSidebar"] { background:linear-gradient(180deg,#102b3a 0%,#173f4b 100%); }
-[data-testid="stSidebar"] * { color:#f4f8f8 !important; }
-[data-testid="stSidebar"] [data-testid="stRadio"] label { border-radius:10px; padding:.45rem .65rem; }
-[data-testid="stSidebar"] [data-testid="stRadio"] label:hover { background:rgba(255,255,255,.10); }
-[data-testid="stSidebar"] hr { border-color:rgba(255,255,255,.18); }
-.hero { background:linear-gradient(120deg,#102b3a 0%,#17645f 68%,#1b9384 100%); padding:1.7rem 2rem; border-radius:22px; color:white; margin-bottom:1.4rem; box-shadow:0 14px 35px rgba(16,43,58,.15); }
-.hero h1 { font-family:'Playfair Display',serif; font-size:2.25rem; margin:0 0 .35rem 0; color:white; letter-spacing:-.4px; }
-.hero p { color:#d6e9e7; margin:0; font-size:1rem; }
-.eyebrow { text-transform:uppercase; letter-spacing:2px; font-size:.72rem; font-weight:700; color:#a8e4dc; margin-bottom:.6rem; }
-.section-kicker { color:#0f766e; text-transform:uppercase; font-size:.72rem; font-weight:700; letter-spacing:1.5px; }
-h1,h2,h3 { color:#173747; }
-h2 { font-weight:700; letter-spacing:-.4px; }
-[data-testid="stMetric"] { background:#fff; border:1px solid #e4ebeb; padding:1rem 1.1rem; border-radius:16px; box-shadow:0 4px 16px rgba(19,51,61,.045); }
-[data-testid="stMetricLabel"] { color:#657786; font-weight:600; }
-[data-testid="stMetricValue"] { color:#123b45; font-weight:700; }
-[data-testid="stForm"], [data-testid="stExpander"] { background:#fff; border:1px solid #e2e9e8; border-radius:16px; padding:.5rem; }
-[data-testid="stDataFrame"] { border:1px solid #e0e8e7; border-radius:14px; overflow:hidden; }
-.stButton > button, [data-testid="stFormSubmitButton"] button { background:linear-gradient(120deg,#0f766e,#13978a); color:white; border:0; border-radius:10px; padding:.55rem 1rem; font-weight:700; transition:all .2s ease; }
-.stButton > button:hover, [data-testid="stFormSubmitButton"] button:hover { background:linear-gradient(120deg,#0b5f59,#0f766e); color:white; border:0; transform:translateY(-1px); box-shadow:0 5px 14px rgba(15,118,110,.2); }
-[data-testid="stTextInput"] input, [data-testid="stTextArea"] textarea, [data-testid="stNumberInput"] input { border-radius:10px; }
-[data-baseweb="select"] > div { border-radius:10px; }
+.stApp { background:var(--paper); color:var(--ink); }
+[data-testid="stHeader"] { background:rgba(251,251,248,.9); }
+.block-container { max-width:1480px; padding-top:1.6rem; padding-bottom:3rem; }
+[data-testid="stSidebar"] { background:#172f2b; border-right:1px solid rgba(255,255,255,.08); }
+[data-testid="stSidebar"] * { color:#f4f7f4; }
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p { color:#aabbb4 !important; }
+[data-testid="stSidebar"] hr { border-color:rgba(255,255,255,.13); }
+[data-testid="stSidebar"] [data-testid="stRadio"] > label { display:none; }
+[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] { gap:.32rem; }
+[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label { border:1px solid transparent; border-radius:11px; padding:.65rem .72rem; transition:background .15s ease,border-color .15s ease; }
+[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label:hover { background:rgba(255,255,255,.07); }
+[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label:has(input:checked) { background:#294940; border-color:#41675b; }
+[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] label p { font-size:.91rem; font-weight:500; }
+.brand-lockup { display:flex; align-items:center; gap:12px; padding:.25rem 0 .6rem; }
+.brand-mark { display:grid; place-items:center; width:42px; height:42px; border-radius:14px; background:#d9eee5; color:#183d35; font-size:1.35rem; }
+.brand-name { font-family:'Manrope',sans-serif; font-size:1.35rem; font-weight:800; letter-spacing:-.8px; color:#fff; line-height:1.1; }
+.brand-sub { font-size:.65rem; color:#aabbb4; letter-spacing:1.4px; text-transform:uppercase; margin-top:5px; }
+.hero { background:linear-gradient(112deg,#173b33 0%,#24574a 62%,#397b65 100%); padding:1.7rem 2rem; border-radius:22px; color:#fff; margin-bottom:1.5rem; box-shadow:0 12px 32px rgba(24,61,53,.10); position:relative; overflow:hidden; }
+.hero:after { content:''; position:absolute; width:220px; height:220px; right:-55px; top:-95px; border:1px solid rgba(255,255,255,.13); border-radius:50%; box-shadow:0 0 0 28px rgba(255,255,255,.035),0 0 0 58px rgba(255,255,255,.025); }
+.eyebrow { text-transform:uppercase; letter-spacing:2px; font-size:.68rem; font-weight:700; color:#c0e5d5; margin-bottom:.65rem; }
+.hero h1 { font-family:'Manrope',sans-serif; font-size:clamp(1.7rem,3vw,2.45rem); line-height:1.15; margin:0 0 .5rem; color:white; letter-spacing:-1.2px; }
+.hero p { color:#d9e9e1; margin:0; font-size:.98rem; max-width:660px; line-height:1.6; }
+h1,h2,h3 { font-family:'Manrope',sans-serif; color:#203b34; letter-spacing:-.55px; }
+h1 { font-weight:800; } h2 { font-weight:750; } h3 { font-weight:700; }
+[data-testid="stMetric"] { background:#fff; border:1px solid var(--line); padding:1.05rem 1.1rem; border-radius:17px; box-shadow:0 3px 12px rgba(23,47,43,.025); }
+[data-testid="stMetricLabel"] { color:#78837e; font-size:.82rem; font-weight:600; }
+[data-testid="stMetricValue"] { color:#1d4338; font-family:'Manrope',sans-serif; font-weight:800; letter-spacing:-.8px; }
+[data-testid="stMetricDelta"] { font-size:.78rem; }
+[data-testid="stForm"], [data-testid="stExpander"] { background:#fff; border:1px solid var(--line); border-radius:16px; padding:.65rem .8rem; }
+[data-testid="stExpander"] summary { font-weight:650; }
+[data-testid="stDataFrame"] { border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff; }
+/* Quiet, modern workspace buttons: restrained dark primary, clean outlined secondary. */
+.stButton > button, [data-testid="stFormSubmitButton"] button { background:#214a3e; color:#fff; border:1px solid #214a3e; border-radius:10px; min-height:2.55rem; padding:.52rem 1rem; font-weight:650; font-size:.9rem; box-shadow:none; transition:background .16s ease,border-color .16s ease; }
+.stButton > button:hover, [data-testid="stFormSubmitButton"] button:hover { background:#173a31; color:#fff; border-color:#173a31; box-shadow:0 3px 10px rgba(23,58,49,.12); }
+.stButton > button:focus, [data-testid="stFormSubmitButton"] button:focus { box-shadow:0 0 0 3px rgba(180,217,201,.65); outline:none; }
+.stButton > button:disabled, [data-testid="stFormSubmitButton"] button:disabled { background:#e7ebe7; color:#929b95; border-color:#e7ebe7; }
+[data-testid="stTextInput"] input, [data-testid="stTextArea"] textarea, [data-testid="stNumberInput"] input { border-radius:10px; border-color:#dfe5df; background:#fff; }
+[data-testid="stTextInput"] input:focus, [data-testid="stTextArea"] textarea:focus, [data-testid="stNumberInput"] input:focus { border-color:#6d9d89; box-shadow:0 0 0 1px #6d9d89; }
+[data-baseweb="select"] > div { border-radius:10px; border-color:#dfe5df; }
 [data-testid="stAlert"] { border-radius:12px; }
-hr { border-color:#e1e8e7; }
-.small-note { color:#71818a; font-size:.86rem; }
-@media (max-width: 700px) { .hero { padding:1.2rem; } .hero h1 { font-size:1.65rem; } }
+[data-testid="stTabs"] button { font-weight:650; }
+hr { border-color:var(--line); }
+.small-note { color:#77827e; font-size:.86rem; }
+@media (max-width:700px) { .hero { padding:1.25rem; border-radius:17px; } .hero h1 { font-size:1.65rem; } .block-container { padding-left:1rem; padding-right:1rem; } }
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown("""
 <div class="hero">
-  <div class="eyebrow">Hospitality, made seamless</div>
-  <h1>Haven · Hotel & Restaurant</h1>
-  <p>A unified workspace for guest stays, room bookings, dining, payments and service.</p>
+  <div class="eyebrow">A considered approach to hospitality</div>
+  <h1>Every stay, thoughtfully managed.</h1>
+  <p>One calm, connected workspace for guest experiences, room reservations, dining, payments and service operations.</p>
 </div>
 """, unsafe_allow_html=True)
 with st.sidebar:
-    st.markdown("# 🏨 HAVEN")
-    st.caption("HOTEL & RESTAURANT MANAGEMENT")
+    st.markdown("""
+    <div class="brand-lockup">
+      <div class="brand-mark">✦</div>
+      <div><div class="brand-name">haven</div><div class="brand-sub">Hospitality suite</div></div>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown("<div style='color:#aabbb4;font-size:.82rem;line-height:1.5'>Hotel & restaurant operations, brought together.</div>", unsafe_allow_html=True)
     st.divider()
-    st.markdown("**PROJECT TEAM**")
+    st.markdown("<div style='font-size:.68rem;letter-spacing:1.4px;color:#aabbb4;font-weight:700'>PROJECT TEAM</div>", unsafe_allow_html=True)
     st.caption("Sanjay Thandeeswaran · 25BCE2759")
     st.caption("Monish Kumar T O · 25BCE2819")
     st.divider()
@@ -301,7 +322,8 @@ page = page.split(" ", 1)[1] if " " in page else page
 # ============================================================
 
 if page == "Dashboard":
-    st.header("Dashboard")
+    st.header("Overview")
+    st.caption("A live snapshot of your hospitality operations.")
 
     try:
         guests = fetch_all("SELECT COUNT(*) AS n FROM Guest")[0]["n"]
@@ -341,7 +363,8 @@ if page == "Dashboard":
 # ============================================================
 
 elif page == "Guest Management":
-    st.header("Guest Management")
+    st.header("Guest management")
+    st.caption("Create guest profiles and keep contact details up to date.")
 
     with st.expander("➕ Add New Guest", expanded=True):
         with st.form("add_guest"):
@@ -429,7 +452,8 @@ elif page == "Guest Management":
 # ============================================================
 
 elif page == "Room Management":
-    st.header("Room Management")
+    st.header("Rooms & inventory")
+    st.caption("Manage room types, nightly rates and availability status.")
 
     with st.form("add_room"):
         room_no = st.text_input("Room Number")
@@ -481,7 +505,8 @@ elif page == "Room Management":
 # ============================================================
 
 elif page == "Reservations":
-    st.header("Reservations & Room Availability")
+    st.header("Reservations")
+    st.caption("Plan guest stays and prevent overlapping room bookings.")
 
     guests = fetch_all("SELECT Guest_ID, Guest_Name FROM Guest ORDER BY Guest_Name")
     rooms = fetch_all(
@@ -578,7 +603,8 @@ elif page == "Reservations":
 # ============================================================
 
 elif page == "Restaurant & Menu":
-    st.header("Restaurant & Menu Management")
+    st.header("Restaurant & menu")
+    st.caption("Manage dining venues and the items available to guests.")
 
     with st.expander("Add Restaurant"):
         with st.form("add_restaurant"):
@@ -650,7 +676,8 @@ elif page == "Restaurant & Menu":
 # ============================================================
 
 elif page == "Food Orders":
-    st.header("Food Orders")
+    st.header("Dining orders")
+    st.caption("Create orders and review item subtotals and order history.")
 
     guests = fetch_all("SELECT Guest_ID, Guest_Name FROM Guest ORDER BY Guest_Name")
     restaurants = fetch_all(
@@ -744,7 +771,8 @@ elif page == "Food Orders":
 # ============================================================
 
 elif page == "Payments":
-    st.header("Payments")
+    st.header("Payments & billing")
+    st.caption("Record payments and review transaction history.")
 
     guests = fetch_all("SELECT Guest_ID, Guest_Name FROM Guest ORDER BY Guest_Name")
     reservations = fetch_all("""
@@ -807,7 +835,8 @@ elif page == "Payments":
 # ============================================================
 
 elif page == "Staff & Service Requests":
-    st.header("Staff & Service Requests")
+    st.header("Staff & service")
+    st.caption("Coordinate team assignments and guest requests.")
 
     with st.expander("Add Staff Member"):
         with st.form("add_staff"):
@@ -888,7 +917,8 @@ elif page == "Staff & Service Requests":
 # ============================================================
 
 elif page == "SQL Analytics & Views":
-    st.header("Advanced SQL Analytics & Views")
+    st.header("Analytics & reports")
+    st.caption("Explore operational insights with joins, aggregates, subqueries and views.")
 
     analytics = {
         "Payments by Guest (JOIN + GROUP BY)": """
