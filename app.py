@@ -7,7 +7,7 @@ from datetime import date, timedelta
 from decimal import Decimal
 
 st.set_page_config(
-    page_title="Haven | Hotel & Restaurant Management",
+    page_title="Hotel & Restaurant Management",
     page_icon="🏨",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -409,7 +409,7 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
     st.divider()
-    st.markdown('<div class="side-label">PROJECT TEAM</div>', unsafe_allow_html=True)
+    st.markdown('<div class="side-label">CREATED BY</div>', unsafe_allow_html=True)
     st.markdown("Sanjay Thandeeswaran · 25BCE2759")
     st.markdown("Monish Kumar T O · 25BCE2819")
 
@@ -1255,4 +1255,4 @@ elif page == "Test Database Connection":
 
 #foot
 st.divider()
-st.caption("Hotel and Restaurant Management System | Database Systems Project")
+st.caption("Hotel and Restaurant Management System")
