@@ -414,12 +414,14 @@ with st.sidebar:
     <div class="brand-lockup">
       <div class="brand-mark">✦</div>
       <div><div class="brand-name">SMHR</div><div class="brand-sub">Hospitality suites and restaurant</div></div>
-      <div class="brand-sub"><br>By Sanjay Thandeeswaran (25BCE2759) and Monish Kumar T O (25BCE2819)</div>
     </div>
     """,
         unsafe_allow_html=True,
     )
     st.divider()
+    st.markdown('<div class="side-label">PROJECT TEAM</div>', unsafe_allow_html=True)
+    st.caption("Sanjay Thandeeswaran · 25BCE2759")
+    st.caption("Monish Kumar T O · 25BCE2819")
 
 try:
     initialize_database()
@@ -448,9 +450,7 @@ with st.sidebar:
         label_visibility="collapsed",
     )
     st.divider()
-    st.markdown('<div class="side-label">PROJECT TEAM</div>', unsafe_allow_html=True)
-    st.caption("Sanjay Thandeeswaran · 25BCE2759")
-    st.caption("Monish Kumar T O · 25BCE2819")
+    
 
 page = page.split(" ", 1)[1] if " " in page else page
 
