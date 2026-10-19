@@ -414,7 +414,7 @@ with st.sidebar:
     <div class="brand-lockup">
       <div class="brand-mark">✦</div>
       <div><div class="brand-name">SMHR</div><div class="brand-sub">Hospitality suites and restaurant</div></div>
-      <div class="brand-sub">By Sanjay Thandeeswaran (25BCE2759) and Monish Kumar T O (25BCE2819)</div>
+      <div class="brand-sub"><br>By Sanjay Thandeeswaran (25BCE2759) and Monish Kumar T O (25BCE2819)</div>
     </div>
     """,
         unsafe_allow_html=True,
