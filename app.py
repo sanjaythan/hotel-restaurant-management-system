@@ -6,7 +6,7 @@ from datetime import date, timedelta
 from decimal import Decimal
 
 st.set_page_config(
-    page_title="Hotel & Restaurant Management",
+    page_title="Haven | Hotel & Restaurant Management",
     page_icon="🏨",
     layout="wide",
     initial_sidebar_state="expanded"
