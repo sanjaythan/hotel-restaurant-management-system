@@ -13,9 +13,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ============================================================
-# THEME
-# ============================================================
+# Theme part
 FOREST = "#1f4a3d"
 MINT = "#d9eee5"
 ACCENT = "#b4d9c9"
@@ -160,9 +158,7 @@ hr{ border-color:var(--line); }
 )
 
 
-# ============================================================
-# UI HELPERS
-# ============================================================
+# UI part
 def page_head(eyebrow, title, subtitle):
     st.markdown(
         f"""<div class="page-head"><div class="eyebrow">{eyebrow}</div>
@@ -217,9 +213,7 @@ def initials(name):
     return (parts[0][0] + (parts[-1][0] if len(parts) > 1 else "")).upper()
 
 
-# ============================================================
-# 1. CLOUD DATABASE CONNECTION
-# ============================================================
+# Connecting to cloud database
 def get_connection():
     """Connect using Streamlit Cloud Secrets in the [mysql] section.
 
@@ -265,9 +259,7 @@ def execute(sql, params=()):
         conn.close()
 
 
-# ============================================================
-# 2. CREATE TABLES
-# ============================================================
+# Creating tables
 SCHEMA = [
     """
     CREATE TABLE IF NOT EXISTS Guest (
@@ -405,9 +397,7 @@ def initialize_database():
     return True
 
 
-# ============================================================
-# 3. SIDEBAR + STARTUP
-# ============================================================
+# Sidebar and starting page
 with st.sidebar:
     st.markdown(
         """
@@ -455,9 +445,7 @@ with st.sidebar:
 page = page.split(" ", 1)[1] if " " in page else page
 
 
-# ============================================================
-# 4. DASHBOARD
-# ============================================================
+# Dashboard creation
 if page == "Dashboard":
     today = date.today()
     st.markdown(
@@ -500,7 +488,7 @@ if page == "Dashboard":
         kpi(r2[2], "Dining sales", money(food_rev), "All restaurant orders", "🍽️", GOLD, "#f8ecd0")
         kpi(r2[3], "Avg. room rate", money(one("SELECT COALESCE(AVG(Price_Per_Night),0) AS n FROM Room")), "Per night", "🏷️", "#6f7c77", "#e8ecea")
 
-        # ---- Charts ----
+        # charts
         section("Performance")
         c1, c2 = st.columns([3, 2])
 
@@ -589,7 +577,7 @@ if page == "Dashboard":
             else:
                 st.markdown('<div class="empty">No service requests yet.</div>', unsafe_allow_html=True)
 
-        # ---- Today's movement + recent ----
+        # stats
         section("Today at the property")
         a1, a2 = st.columns(2)
         movements = fetch_all("""
@@ -630,9 +618,8 @@ if page == "Dashboard":
         st.error(str(e))
 
 
-# ============================================================
-# 5. GUEST MANAGEMENT
-# ============================================================
+
+# Guest management part
 elif page == "Guest Management":
     page_head("Guests", "Guest management", "Create guest profiles and keep contact details up to date.")
 
@@ -708,9 +695,7 @@ elif page == "Guest Management":
         st.error(str(e))
 
 
-# ============================================================
-# 6. ROOM MANAGEMENT
-# ============================================================
+#Room management part
 elif page == "Room Management":
     page_head("Inventory", "Rooms & inventory", "Manage room types, nightly rates and availability status.")
 
@@ -768,9 +753,7 @@ elif page == "Room Management":
                 st.error(str(e))
 
 
-# ============================================================
-# 7. RESERVATIONS
-# ============================================================
+# Reservations part
 elif page == "Reservations":
     page_head("Bookings", "Reservations", "Plan guest stays and prevent overlapping room bookings.")
 
@@ -848,9 +831,9 @@ elif page == "Reservations":
         st.error(str(e))
 
 
-# ============================================================
-# 8. RESTAURANT AND MENU
-# ============================================================
+
+# Restaurant and Menu management part
+
 elif page == "Restaurant & Menu":
     page_head("Dining", "Restaurant & menu", "Manage dining venues and the items available to guests.")
 
@@ -910,9 +893,8 @@ elif page == "Restaurant & Menu":
         st.error(str(e))
 
 
-# ============================================================
-# 9. FOOD ORDERS
-# ============================================================
+
+# Food ordering part
 elif page == "Food Orders":
     page_head("Dining", "Dining orders", "Create orders and review item subtotals and order history.")
 
@@ -989,9 +971,8 @@ elif page == "Food Orders":
         st.error(str(e))
 
 
-# ============================================================
-# 10. PAYMENTS
-# ============================================================
+
+# Payments part
 elif page == "Payments":
     page_head("Billing", "Payments & billing", "Record payments and review transaction history.")
 
@@ -1053,9 +1034,8 @@ elif page == "Payments":
         st.error(str(e))
 
 
-# ============================================================
-# 11. STAFF AND SERVICE REQUESTS
-# ============================================================
+
+# Service and stff part
 elif page == "Staff & Service Requests":
     page_head("Operations", "Staff & service", "Coordinate team assignments and guest requests.")
 
@@ -1147,9 +1127,7 @@ elif page == "Staff & Service Requests":
             st.error(str(e))
 
 
-# ============================================================
-# 12. SQL ANALYTICS AND VIEWS
-# ============================================================
+#analytics part
 elif page == "SQL Analytics & Views":
     page_head("Insights", "Analytics & reports",
               "Explore operational insights with joins, aggregates, subqueries and views.")
@@ -1231,9 +1209,7 @@ elif page == "SQL Analytics & Views":
                 st.error(str(e))
 
 
-# ============================================================
-# 13. TEST CASES AND CONNECTION TEST
-# ============================================================
+#creative connectivity part
 elif page == "Test Database Connection":
     page_head("System", "Test cases & database connection", "Verify connectivity and review the project test plan.")
 
@@ -1277,8 +1253,6 @@ elif page == "Test Database Connection":
     c3.metric("Subtotal", money(unit_price * qty))
 
 
-# ============================================================
-# FOOTER
-# ============================================================
+#foot
 st.divider()
 st.caption("Hotel and Restaurant Management System | Database Systems Project")
